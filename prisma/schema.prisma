@@ -1,0 +1,128 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  //schemas   = ["public", "auth"]
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+// Enums
+enum user_role {
+  frontend
+  backend
+  fullstack
+  devops
+  data_scientist
+  other
+}
+
+enum experience_level {
+  entry
+  junior
+  mid
+  senior
+  lead
+}
+
+enum post_category {
+  interview_experience
+  technical_error
+  career_advice
+  job_search_tip
+  other
+}
+
+enum difficulty_level {
+  easy
+  medium
+  hard
+  expert
+}
+
+enum recommendation_type {
+  interview_prep
+  skill_improvement
+  career_growth
+  job_opportunity
+}
+
+enum activity_type {
+  post_created
+  question_answered
+  profile_updated
+  recommendation_viewed
+}
+
+// Models
+model users {
+  user_id          String                 @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  github_id        String?                @unique @db.VarChar(100)
+  username         String?                @db.VarChar(100)
+  email            String?                @unique @db.VarChar(255)
+  avatar_url       String?
+  role             user_role?
+  experience_level experience_level?
+  created_at       DateTime               @default(now()) @db.Timestamptz()
+  updated_at       DateTime               @default(now()) @updatedAt @db.Timestamptz()
+  posts            posts[]
+  recommendations  user_recommendations[]
+  activities       user_activity[]
+}
+
+model posts {
+  post_id      String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id      String        @db.Uuid
+  content      String
+  is_anonymous Boolean       @default(false)
+  category     post_category
+  created_at   DateTime      @default(now()) @db.Timestamptz()
+  updated_at   DateTime      @default(now()) @updatedAt @db.Timestamptz()
+  user         users         @relation(fields: [user_id], references: [user_id])
+  tags         post_tags[]
+}
+
+model technical_questions {
+  question_id      String           @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  content          String
+  category         user_role
+  difficulty_level difficulty_level
+  created_at       DateTime         @default(now()) @db.Timestamptz()
+  updated_at       DateTime         @default(now()) @updatedAt @db.Timestamptz()
+}
+
+model user_recommendations {
+  recommendation_id String              @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id           String              @db.Uuid
+  content           String
+  type              recommendation_type
+  created_at        DateTime            @default(now()) @db.Timestamptz()
+  user              users               @relation(fields: [user_id], references: [user_id])
+}
+
+model user_activity {
+  activity_id   String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id       String        @db.Uuid
+  activity_type activity_type
+  activity_data Json
+  created_at    DateTime      @default(now()) @db.Timestamptz()
+  user          users         @relation(fields: [user_id], references: [user_id])
+}
+
+model tags {
+  tag_id Int         @id @default(autoincrement())
+  name   String      @unique @db.VarChar(50)
+  posts  post_tags[]
+}
+
+model post_tags {
+  post_id String @db.Uuid
+  tag_id  Int
+  post    posts  @relation(fields: [post_id], references: [post_id])
+  tag     tags   @relation(fields: [tag_id], references: [tag_id])
+
+  @@id([post_id, tag_id])
+}
