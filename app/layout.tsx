@@ -2,7 +2,9 @@ import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ModeToggle } from "@/components/ModeToggle";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import SidebarComponent from "@/components/core/SidebarComponent";
+import NavbarComponent from "@/components/core/NavbarComponent";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -28,10 +30,24 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
         >
-          <main className="min-h-screen flex flex-col items-center">
-          <ModeToggle />
-            {children}
-          </main>
+          <TooltipProvider>
+            <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+              <SidebarComponent />
+              <div className="flex flex-col">
+                <NavbarComponent />
+                {children}
+              </div>
+              
+            </div>
+            {/*  <main className="min-h-screen flex flex-col items-center">
+              <div className="flex min-h-screen w-full flex-col bg-muted/40">
+                <SidebarComponent />
+                <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+                  {children}
+                </div>
+              </div>
+            </main> */}
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
