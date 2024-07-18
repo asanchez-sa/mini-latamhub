@@ -3,9 +3,8 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-import SidebarComponent from "@/components/core/SidebarComponent";
 import NavbarComponent from "@/components/core/NavbarComponent";
-import Link from "next/link";
+import { Toaster } from "@/components/ui/toaster";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -43,6 +42,7 @@ export default function RootLayout({
               </main>
             </div>
           </TooltipProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
