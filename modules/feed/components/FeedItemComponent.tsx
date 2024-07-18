@@ -1,3 +1,5 @@
+"use client";
+
 import { PlusCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -13,35 +15,41 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default async function FeedItemComponent() {
+import Avvvatars from "avvvatars-react";
+import { Badge } from "@/components/ui/badge";
+import ExpandableTextComponent from "./ExpandableTextComponent";
+
+export default function FeedItemComponent() {
   return (
-    <Card x-chunk="dashboard-07-chunk-0">
+    <Card>
       <CardHeader>
-        <CardTitle>Product Details</CardTitle>
-        <CardDescription>
-          Lipsum dolor sit amet, consectetur adipiscing elit
-        </CardDescription>
+        <CardTitle>Lecture Reschedulingss.</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-6">
-          <div className="grid gap-3">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              type="text"
-              className="w-full"
-              defaultValue="Gamer Gear Pro Controller"
-            />
+        <div>
+          <div className="flex items-center gap-4">
+            <Avvvatars value="best_user@gmail.com" style="shape" />
+
+            <div className="grid gap-1">
+              <p className="text-sm font-medium leading-none">Olivia Martin</p>
+              <p className="text-sm text-muted-foreground">
+                olivia.martin@email.com
+              </p>
+            </div>
+            <div className="ml-auto">
+              <Badge className="mr-2">Badge</Badge>
+              <Badge>Badge</Badge>
+            </div>
           </div>
-          <div className="grid gap-3">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc."
-              className="min-h-32"
-            />
-          </div>
+
+          <ExpandableTextComponent
+            text="New Yorkers are facing the winter chill with less warmth this year as
+          the city's most revered soup stand unexpectedly shutters, following a
+          series of events that have left the community puzzled."
+            maxLength={150}
+          />
         </div>
       </CardContent>
     </Card>

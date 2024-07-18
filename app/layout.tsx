@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import SidebarComponent from "@/components/core/SidebarComponent";
 import NavbarComponent from "@/components/core/NavbarComponent";
+import Link from "next/link";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -31,22 +32,16 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <TooltipProvider>
-            <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-              <SidebarComponent />
-              <div className="flex flex-col">
-                <NavbarComponent />
-                {children}
-              </div>
-              
-            </div>
-            {/*  <main className="min-h-screen flex flex-col items-center">
-              <div className="flex min-h-screen w-full flex-col bg-muted/40">
-                <SidebarComponent />
-                <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+            <div className="flex min-h-screen w-full flex-col">
+              <NavbarComponent />
+              <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
+                <div className="mx-auto grid w-full max-w-6xl items-start gap-6 grid-cols-[20%_60%_20%] lg:grid-cols-[20%_60%_20%]">
+                  <div className="hidden md:grid">LEFT</div>
                   {children}
+                  <div className="hidden md:grid text-right">RIGHT</div>
                 </div>
-              </div>
-            </main> */}
+              </main>
+            </div>
           </TooltipProvider>
         </ThemeProvider>
       </body>
