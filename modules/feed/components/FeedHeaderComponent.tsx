@@ -18,13 +18,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
-  bio: z
+  message: z
     .string()
     .min(10, {
-      message: "Bio must be at least 10 characters.",
+      message: "El post debe tener al menos 10 caracteres.",
     })
-    .max(160, {
-      message: "Bio must not be longer than 30 characters.",
+    .max(600, {
+      message: "El post debe tener menos de 600 caracteres.",
     }),
 });
 
@@ -49,7 +49,7 @@ export default function FeedHeaderComponent() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
-          name="bio"
+          name="message"
           render={({ field }) => (
             <FormItem>
               <div className="flex justify-between items-center gap-4">
