@@ -36,7 +36,7 @@ export default function RightSidebarComponent() {
       <h4 className="mb-4 mt-4 text-xl font-bold">Trending Posts</h4>
       <section className="flex flex-col space-y-10">
         {POST.map((e, index) => (
-          <div style={{ marginBottom: 15 }}>
+          <div style={{ marginBottom: 15 }} key={e}>
             <div
               key={e}
               className="flex flex-col items-center gap-2"

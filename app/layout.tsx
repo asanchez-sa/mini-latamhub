@@ -6,6 +6,7 @@ import { TooltipProvider } from "@radix-ui/react-tooltip";
 import NavbarComponent from "@/components/core/NavbarComponent";
 import { Toaster } from "@/components/ui/toaster";
 import RightSidebarComponent from "@/modules/feed/components/RightSidebarComponent";
+import SidebarComponent from "@/components/core/SidebarComponent";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -36,7 +37,9 @@ export default function RootLayout({
               <NavbarComponent />
               <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
                 <div className="mx-auto grid w-full max-w-6xl items-start gap-6 grid-cols-[20%_60%_20%] lg:grid-cols-[20%_60%_20%]">
-                  <div className="hidden md:grid">LEFT</div>
+                  <div className="hidden md:grid">
+                    <SidebarComponent />
+                  </div>
                   {children}
                   <div className="hidden md:grid pl-10">
                     <RightSidebarComponent />

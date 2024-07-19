@@ -52,7 +52,7 @@ export default async function NavbarComponent() {
           <Package2 className="h-6 w-6" />
           <span className="sr-only">Acme Inc</span>
         </Link>
-        <Link
+        {/* <Link
           href="#"
           className="text-muted-foreground transition-colors hover:text-foreground"
         >
@@ -75,7 +75,7 @@ export default async function NavbarComponent() {
           className="text-muted-foreground transition-colors hover:text-foreground"
         >
           Tips
-        </Link>
+        </Link> */}
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -124,7 +124,7 @@ export default async function NavbarComponent() {
         </SheetContent>
       </Sheet>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        <form className="ml-auto flex-1 sm:flex-initial">
+        <form className="ml-auto">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
@@ -134,6 +134,8 @@ export default async function NavbarComponent() {
             />
           </div>
         </form>
+        <div className="ml-auto flex-1 sm:flex-initial"></div>
+
         <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

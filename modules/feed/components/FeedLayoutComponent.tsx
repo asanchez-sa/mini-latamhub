@@ -9,8 +9,8 @@ export default function FeedLayoutComponent({
 }) {
   return (
     <div className="grid gap-6">
-      <FeedHeaderComponent />
-      <Separator className="my-4" />
+      {/* <FeedHeaderComponent />
+      <Separator className="my-4" /> */}
       <FeedListComponent />
     </div>
   );
