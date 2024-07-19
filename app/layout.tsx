@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import NavbarComponent from "@/components/core/NavbarComponent";
 import { Toaster } from "@/components/ui/toaster";
+import RightSidebarComponent from "@/modules/feed/components/RightSidebarComponent";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -37,7 +38,9 @@ export default function RootLayout({
                 <div className="mx-auto grid w-full max-w-6xl items-start gap-6 grid-cols-[20%_60%_20%] lg:grid-cols-[20%_60%_20%]">
                   <div className="hidden md:grid">LEFT</div>
                   {children}
-                  <div className="hidden md:grid text-right">RIGHT</div>
+                  <div className="hidden md:grid pl-10">
+                    <RightSidebarComponent />
+                  </div>
                 </div>
               </main>
             </div>
